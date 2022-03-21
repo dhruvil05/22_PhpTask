@@ -16,7 +16,6 @@
     .container {
 
         width: 500px;
-        height: auto;
 
     }
     </style>
@@ -53,7 +52,7 @@
             </div>
 
             <div class="mb-3">
-                <!-- <label for="image" class="form-label">select image</label> -->
+
                 <input type="file" class="form-control" id="img" name="image">
 
             </div>
