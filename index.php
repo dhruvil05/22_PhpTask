@@ -62,13 +62,13 @@
                 <td><?php echo $data['phone']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td><?php echo $data['gender']; ?></td>
-                <td><?php echo $data['image']; ?></td>
+                <td><a href=""><?php echo $data['image']; ?></a></td>
                 <td><?php echo $data['created_date']; ?></td>
 
             </tr>
             <?php }  ?>
         </table>
-        <?php echo "Total no of rows:" .$row ; ?>
+        <?php echo "<b>Total no of rows:" .$row . "</b>" ; ?>
 
     </div>
 

@@ -35,6 +35,9 @@ $name = $phone = $email = $gender = $image = "";
             
             
             $image_Path = "image/".basename($Get_image_name);
+            // $file_ext= strtolower(end(explode('.',$Get_image_name)));
+            // $extensions= array("jpeg","png", "gif");
+           
 
             $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
         
@@ -44,7 +47,7 @@ $name = $phone = $email = $gender = $image = "";
 
                 header("Location: index.php");
             }else{
-                echo  "";
+                echo  "image not inserted";
             }
 
 } 

@@ -31,7 +31,9 @@
 
 <body>
     <div class="container">
+
         <form action="add_user.php" method="post" enctype="multipart/form-data">
+            <u><h2>Add User</h2></u>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <span class="error">*
@@ -67,11 +69,11 @@
 
             <div class="mb-3">
                 <br>
-                <input type="file" class="form-control" id="img" name="image">
+                <input type="file" class="form-control" id="img" name="image" accept="image/x-png,image/gif,image/jpeg">
 
             </div>
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-            <a href="index.php"><button type="button" class="btn btn-secondary" id="close">Close</button></a>
+            <a href="index.php"><button type="button" class="btn btn-secondary" id="close">Cancel</button></a>
         </form>
     </div>
 
