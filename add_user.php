@@ -55,7 +55,7 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender"" id=" gendermale" value="male>
+                <input class="form-check-input" type="radio" name="gender"" id=" gendermale" value="male">
                 <label class=" form-check-label" for="flexRadioDefault1">Male</label>
             </div>
             <div class="form-check">
@@ -68,7 +68,7 @@
                 <input type="file" class="form-control" id="img" name="image">
                 
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             <button type="button" class="btn btn-secondary">Close</button>
         </form>
     </div>
