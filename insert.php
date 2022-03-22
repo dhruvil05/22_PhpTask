@@ -35,10 +35,7 @@ $name = $phone = $email = $gender = $image = "";
             
             
             $image_Path = "image/".basename($Get_image_name);
-            // $file_ext= strtolower(end(explode('.',$Get_image_name)));
-            // $extensions= array("jpeg","png", "gif");
            
-
             $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
         
             if (move_uploaded_file($_FILES['image']['tmp_name'], $image_Path)) {

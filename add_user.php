@@ -59,7 +59,7 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender"" id=" gendermale" value="male">
+                <input class="form-check-input" type="radio" name="gender" id=" gendermale" value="male">
                 <label class=" form-check-label" for="flexRadioDefault1">Male</label>
             </div>
             <div class="form-check">
