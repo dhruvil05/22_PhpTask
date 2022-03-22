@@ -12,16 +12,32 @@
 
     <title>Hello, world!</title>
     <style>
+    .div1 {
+        display: flex;
+        float: right;
+        margin: 10px;
+    }
 
+    .heading {
+        width: auto;
+        margin-left: 50px;
+        font-weight: bold;
+        border-bottom: 1px solid black;
+    }
     </style>
 </head>
 
 <body>
 
-
-    <div class="mb-3">
+    <h2 class="heading">User List</h2>
+    <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
+        <form class="d-flex mx-3">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
+
     <div class="container">
         <table class="table table-bordered border-primary">
             <tr>
@@ -33,20 +49,26 @@
                 <th>Image</th>
                 <th>Created date</th>
             </tr>
-
+            <?php
+                include "fetch_data.php";
+                $row = mysqli_num_rows($result);
+                
+                
+                while( $data = mysqli_fetch_array($result)){
+            ?>
             <tr class="data">
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?php echo $data['name']; ?></td>
+                <td><?php echo $data['phone']; ?></td>
+                <td><?php echo $data['email']; ?></td>
+                <td><?php echo $data['gender']; ?></td>
+                <td><?php echo $data['image']; ?></td>
+                <td><?php echo $data['created_date']; ?></td>
 
             </tr>
-
+            <?php }  ?>
         </table>
-
+        <?php echo "Total no of rows:" .$row ; ?>
 
     </div>
 
