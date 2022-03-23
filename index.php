@@ -50,11 +50,12 @@
                 <th>Created date</th>
             </tr>
             <?php
-                include "fetch_data.php";
-                $row = mysqli_num_rows($result);
+                // include "img_display.php";
+                require "fetch_data.php";
                 
-                
-                while( $data = mysqli_fetch_array($result)){
+                while($data = mysqli_fetch_array($result)){
+                    include 'img_Modal.php';
+                    $img = $data['image'];
             ?>
             <tr class="data">
 
@@ -62,16 +63,20 @@
                 <td><?php echo $data['phone']; ?></td>
                 <td><?php echo $data['email']; ?></td>
                 <td><?php echo $data['gender']; ?></td>
-                <td><a href=""><?php echo $data['image']; ?></a></td>
+
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <?php echo $img; ?>
+                    </button></td>
                 <td><?php echo $data['created_date']; ?></td>
 
+                
             </tr>
-            <?php }  ?>
+            <?php  }    ?>
         </table>
         <?php echo "<b>Total no of rows:" .$row . "</b>" ; ?>
 
     </div>
-
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
