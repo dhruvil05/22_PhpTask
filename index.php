@@ -69,8 +69,8 @@
                 
                 $rows = mysqli_num_rows($result);
                  
-                         while($data = mysqli_fetch_array($result)){
-                            // include 'img_Modal.php'; 
+                while($data = mysqli_fetch_array($result)){
+                    // include 'img_Modal.php'; 
             ?>
 
             <tr class="data">
@@ -88,7 +88,7 @@
                 <td>
                     <a href="delete.php?sno=<?php echo $data['sno']; ?>">delete</a>
 
-                    <a href="editform.php?sno=<?php echo $data['sno']; ?>" name="edit" >Edit</a>
+                    <a href="edit_handle.php?sno=<?php echo $data['sno']; ?>" name="edit" >Edit</a>
                     </td>
 
             </tr>

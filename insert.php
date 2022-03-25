@@ -26,7 +26,7 @@ $name = $phone = $email = $gender = $image = "";
             
           }
          
-          $phone = $_POST['mobile'];
+          $phone = $_POST['phone'];
           $gender = $_POST['gender'];
           
          

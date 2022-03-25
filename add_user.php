@@ -54,7 +54,7 @@
 
             <div class="mb-3">
                 <label for="mobileNo" class="form-label">Mobile No</label>
-                <input type="tell" class="form-control" id="mobileNo" name="mobile">
+                <input type="tell" class="form-control" id="phoneNo" name="phone">
 
             </div>
 
