@@ -44,10 +44,11 @@ $name = $phone = $email = $gender = $image = "";
 
                 header("Location: index.php");
             }else{
-                echo  "image not inserted";
+                echo  '<script> alert("please! insert image.") ;</script>';
             }
 
 } 
 
 
 ?>
+

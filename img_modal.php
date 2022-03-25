@@ -17,9 +17,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
-
-      
-
        <img src="<?php echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
       
       
