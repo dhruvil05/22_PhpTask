@@ -1,3 +1,4 @@
+<?php require "db_connect.php"; ?>
 <!doctype html>
 <html lang="en">
 
@@ -35,6 +36,23 @@
         width: 200px;
         height: 100px;
     }
+
+    td>a {
+        text-decoration: none;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 5px;
+        color: white;
+        position: relative;
+        left: 10px;
+        top: 40px;
+
+
+    }
+
+    td>a:hover {
+        color: black;
+    }
     </style>
 </head>
 
@@ -61,11 +79,14 @@
                 <th>Gender</th>
                 <th>Image</th>
                 <th>Created date</th>
-                <th>Action</th>
+                <th>Delete</th>
+                <th>Edit</th>
             </tr>
             <?php
               
-                require "fetch_data.php";
+              $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
+
+              $result = mysqli_query($conn, $sql);
                 
                 $rows = mysqli_num_rows($result);
                  
@@ -74,22 +95,18 @@
             ?>
 
             <tr class="data">
-                   
+
                 <td><?php echo $data['name']; ?></td>
                 <td><?php echo $data['phone']; ?></td>
                 <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['gender']; ?></td> 
-                <td>
-                    <!-- <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal"> -->
+                <td><?php echo $data['gender']; ?></td>
+                <td style="justify-content: center; display: flex;">
                     <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
-                    <!-- </a> -->
-                </td>             
+                </td>
                 <td><?php echo $data['created_date']; ?></td>
-                <td>
-                    <a href="delete.php?sno=<?php echo $data['sno']; ?>">delete</a>
+                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" style="background-color:red;">Delete</a></td>
+                <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
 
-                    <a href="add_user.php?sno=<?php echo $data['sno']; ?>">Edit</a>
-                    </td>
 
             </tr>
             <?php  } ?>
@@ -99,8 +116,8 @@
 
     </div>
 
-    
-    <script>
+
+    <!-- <script>
     $(document).ready(function() {
         $("img").click(function() {
             $(this).css({
@@ -109,7 +126,7 @@
             });
         });
     });
-    </script>
+    </script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
