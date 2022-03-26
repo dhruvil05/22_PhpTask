@@ -35,8 +35,17 @@ $name = $phone = $email = $gender = $image = "";
             
             
             $image_Path = "image/".basename($Get_image_name);
-           
-            $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
+            if(isset($_POST['sno'])&& $_POST['sno']>0){
+              $sno = $_POST['sno'];
+              $sqlget = "SELECT * FROM `data` WHERE `sno` = $sno";
+              $result= mysqli_query($conn, $sqlget);
+              $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+              $filename= $row['image'];
+              $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name' WHERE `sno`='$sno'";
+            }else{
+              
+              $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
+            }
         
             if (move_uploaded_file($_FILES['image']['tmp_name'], $image_Path)) {
                 

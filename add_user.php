@@ -1,4 +1,5 @@
 <?php
+require 'db_connect.php';
  require 'insert.php';
 ?>
 <!doctype html>
@@ -28,7 +29,23 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+<?php 
 
+if(isset($_GET['sno'])){
+    // var_dump($_GET['sno']);
+
+    $sno = $_GET['sno'];
+    
+    $sql = "SELECT * FROM `data` WHERE `sno` = $sno";
+    
+    $result= mysqli_query($conn, $sql);
+    if(!$result){
+        echo("Error description: " . mysqli_error($conn));
+    }
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+}
+
+?>
 <body>
     <div class="container">
 
@@ -39,7 +56,7 @@
                 <span class="error">*
                     <?php echo $nameErr;?>
                 </span>
-                <input type="char" class="form-control" id="username" name="username">
+                <input type="char" class="form-control" id="username"  value="<?php if(isset($row)){ echo $row['name']; }?>" name="username">
             </div>
 
             <div class="mb-3">
@@ -48,22 +65,22 @@
                     <?php echo $emailErr;?>
                 </span>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    name="email">
+                value="<?php if(isset($row)){ echo $row['email']; }?>" name="email">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
 
             <div class="mb-3">
                 <label for="mobileNo" class="form-label">Mobile No</label>
-                <input type="tell" class="form-control" id="phoneNo" name="phone">
+                <input type="tell" class="form-control" id="phoneNo" value="<?php if(isset($row)){ echo $row['phone']; }?>" name="phone">
 
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id=" gendermale" value="male">
+                <input class="form-check-input" type="radio" name="gender" id=" gendermale" <?php if(isset($row)&&$row['gender']== 'male'){?> checked <?php  }?> value="male">
                 <label class=" form-check-label" for="flexRadioDefault1">Male</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="female" checked>
+                <input class="form-check-input" type="radio" name="gender" id="genderfemale"  <?php if(isset($row)&&$row['gender'] == 'female'){?> checked <?php }if(!isset($row)){?> checked <?php }?>value="female" >
                 <label class="form-check-label" for="flexRadioDefault2">Female</label>
             </div>
 
@@ -72,6 +89,7 @@
                 <input type="file" class="form-control" id="img" name="image" accept="image/x-png,image/gif,image/jpeg">
 
             </div>
+            <input type="hidden" value="<?php if(isset($row)){ echo $row['sno']; }?>" name="sno">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             <a href="index.php"><button type="button" class="btn btn-secondary" id="close">Cancel</button></a>
         </form>

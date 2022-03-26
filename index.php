@@ -88,7 +88,7 @@
                 <td>
                     <a href="delete.php?sno=<?php echo $data['sno']; ?>">delete</a>
 
-                    <a href="update.php?sno=<?php echo $data['sno']; ?>">Edit</a>
+                    <a href="add_user.php?sno=<?php echo $data['sno']; ?>">Edit</a>
                     </td>
 
             </tr>
