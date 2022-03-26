@@ -41,6 +41,7 @@ $name = $phone = $email = $gender = $image = "";
               $result= mysqli_query($conn, $sqlget);
               $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
               $filename= $row['image'];
+              
               $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name' WHERE `sno`='$sno'";
               
               unlink('image/' .basename($filename));
