@@ -32,7 +32,8 @@ require 'db_connect.php';
 <?php 
 
 if(isset($_GET['sno'])){
-    // var_dump($_GET['sno']);
+    
+    
 
     $sno = $_GET['sno'];
     

@@ -41,8 +41,9 @@ $name = $phone = $email = $gender = $image = "";
               $result= mysqli_query($conn, $sqlget);
               $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
               $filename= $row['image'];
-              
-              $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name' WHERE `sno`='$sno'";
+              date_default_timezone_set("Asia/Calcutta"); 
+              $date = date('Y-m-d H:i:s');
+              $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name', `created_date`='$date' WHERE `sno`='$sno'";
               
               unlink('image/' .basename($filename));
             }else{
