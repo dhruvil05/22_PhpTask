@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once "db_connect.php";
+require "db_connect.php";
  
 // Define variables and initialize with empty values
 $nameErr = $phoneErr = $emailErr = $genderErr = $imageErr = "";
