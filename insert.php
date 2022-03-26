@@ -42,11 +42,13 @@ $name = $phone = $email = $gender = $image = "";
               $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
               $filename= $row['image'];
               $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name' WHERE `sno`='$sno'";
+              
+              unlink('image/' .basename($filename));
             }else{
               
               $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
             }
-        
+           
             if (move_uploaded_file($_FILES['image']['tmp_name'], $image_Path)) {
                 
                 mysqli_query($conn, $sql);
@@ -60,4 +62,3 @@ $name = $phone = $email = $gender = $image = "";
 
 
 ?>
-

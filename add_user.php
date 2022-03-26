@@ -46,17 +46,21 @@ if(isset($_GET['sno'])){
 }
 
 ?>
+
 <body>
     <div class="container">
 
         <form action="add_user.php" method="post" enctype="multipart/form-data">
-            <u><h2>Add User</h2></u>
+            <u>
+                <h2>Add User</h2>
+            </u>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <span class="error">*
                     <?php echo $nameErr;?>
                 </span>
-                <input type="char" class="form-control" id="username"  value="<?php if(isset($row)){ echo $row['name']; }?>" name="username">
+                <input type="char" class="form-control" id="username"
+                    value="<?php if(isset($row)){ echo $row['name']; }?>" name="username">
             </div>
 
             <div class="mb-3">
@@ -65,22 +69,26 @@ if(isset($_GET['sno'])){
                     <?php echo $emailErr;?>
                 </span>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                value="<?php if(isset($row)){ echo $row['email']; }?>" name="email">
+                    value="<?php if(isset($row)){ echo $row['email']; }?>" name="email">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
 
             <div class="mb-3">
                 <label for="mobileNo" class="form-label">Mobile No</label>
-                <input type="tell" class="form-control" id="phoneNo" value="<?php if(isset($row)){ echo $row['phone']; }?>" name="phone">
+                <input type="tell" class="form-control" id="phoneNo"
+                    value="<?php if(isset($row)){ echo $row['phone']; }?>" name="phone">
 
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id=" gendermale" <?php if(isset($row)&&$row['gender']== 'male'){?> checked <?php  }?> value="male">
+                <input class="form-check-input" type="radio" name="gender" id=" gendermale"
+                    <?php if(isset($row)&&$row['gender']== 'male'){?> checked <?php  }?> value="male">
                 <label class=" form-check-label" for="flexRadioDefault1">Male</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="genderfemale"  <?php if(isset($row)&&$row['gender'] == 'female'){?> checked <?php }if(!isset($row)){?> checked <?php }?>value="female" >
+                <input class="form-check-input" type="radio" name="gender" id="genderfemale"
+                    <?php if(isset($row)&&$row['gender'] == 'female'){?> checked <?php }if(!isset($row)){?> checked
+                    <?php }?>value="female">
                 <label class="form-check-label" for="flexRadioDefault2">Female</label>
             </div>
 
