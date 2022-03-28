@@ -19,10 +19,10 @@
     .div1 {
         display: flex;
         float: right;
-        margin-right: 55px;
-        width: 100px;
+        /* margin-right: 55px;
+        width: 100px; */
     }
-    
+
 
     .heading {
         width: auto;
@@ -69,10 +69,10 @@
     <div class="mb-3 div1">
 
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <!-- <form class="d-flex mx-3" action="search.php" method="post">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <form class="d-flex mx-3" action="index.php" method="post">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
             <button class="btn btn-outline-success" type="submit" value="search">Search</button>
-        </form> -->
+        </form>
 
     </div>
 
@@ -91,11 +91,23 @@
             </tr>
             <?php
               
-              $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
+              
+              if(isset($_POST['search']) && !empty($_POST['search'])){
+                  $search=  $_POST['search'];
+                  strtolower($search);
+                //   var_dump($search);
+               
 
-              $result = mysqli_query($conn, $sql);
-                
-                $rows = mysqli_num_rows($result);
+                  $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
+               
+              }
+              else{
+                $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
+
+                }
+                $result = mysqli_query($conn, $sql);
+                  
+                  $rows = mysqli_num_rows($result);
                  
                 while($data = mysqli_fetch_array($result)){
                     // include 'img_Modal.php'; 
