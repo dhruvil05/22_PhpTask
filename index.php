@@ -19,8 +19,10 @@
     .div1 {
         display: flex;
         float: right;
-        margin: 10px;
+        margin-right: 55px;
+        width: 100px;
     }
+    
 
     .heading {
         width: auto;
@@ -54,6 +56,10 @@
     td>a:hover {
         color: black;
     }
+
+    .btn {
+        width: 100px;
+    }
     </style>
 </head>
 
@@ -63,10 +69,10 @@
     <div class="mb-3 div1">
 
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="search.php" method="post">
+        <!-- <form class="d-flex mx-3" action="search.php" method="post">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
             <button class="btn btn-outline-success" type="submit" value="search">Search</button>
-        </form>
+        </form> -->
 
     </div>
 
