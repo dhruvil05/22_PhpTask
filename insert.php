@@ -33,8 +33,8 @@ $name = $phone = $email = $gender = $image = "";
        
             $Get_image_name = $_FILES['image']['name'];
             
-            
             $image_Path = "image/".basename($Get_image_name);
+            
             if(isset($_POST['sno'])&& $_POST['sno']>0){
               $sno = $_POST['sno'];
               $sqlget = "SELECT * FROM `data` WHERE `sno` = $sno";
@@ -45,7 +45,9 @@ $name = $phone = $email = $gender = $image = "";
               $date = date('Y-m-d H:i:s');
               $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name', `created_date`='$date' WHERE `sno`='$sno'";
               
-              unlink('image/' .basename($filename));
+
+                  unlink('image/' .basename($filename));
+              
             }else{
               
               $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";

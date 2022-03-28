@@ -11,10 +11,13 @@
             $image = $data['image'];
             $image_Path = "image/".basename($image);
            $sql = "DELETE FROM `data` WHERE sno='$sno'";
-           if (unlink($image_Path)) {
-           $result = mysqli_query($conn, $sql);
+            
+           if(basename($image_Path)== $image){
+            unlink($image_Path);
+            $result = mysqli_query($conn, $sql);
             header("location:index.php");
            }
+      
         }
         else{
             echo "sorry! your data not deleted. ";
@@ -23,3 +26,9 @@
     
  
 ?>
+   <!-- if(basename($image_Path)== $filename){
+        }
+        else{
+          echo  '<script> alert("file is alredy deleted.") ;</script>';
+          header("location: index.php");
+        } -->

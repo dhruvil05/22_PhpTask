@@ -33,8 +33,6 @@ require 'db_connect.php';
 
 if(isset($_GET['sno'])){
     
-    
-
     $sno = $_GET['sno'];
     
     $sql = "SELECT * FROM `data` WHERE `sno` = $sno";
@@ -44,6 +42,7 @@ if(isset($_GET['sno'])){
         echo("Error description: " . mysqli_error($conn));
     }
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    // var_dump($row);
 }
 
 ?>
