@@ -39,6 +39,7 @@
         width: 200px;
         height: 100px;
     }
+
     td>img:hover {
         width: 300px;
         height: 300px;
@@ -79,6 +80,11 @@
         </form>
 
     </div>
+    <?php
+   
+    ?>
+
+
 
     <div class="container">
         <table class="table table-bordered border-primary" id="myTable">
@@ -94,8 +100,17 @@
                 <th>Edit</th>
             </tr>
             <?php
+               $limit = 10;  
+    
+               if (isset($_GET["page"])) {
+                   $page  = $_GET["page"]; 
+                //    var_dump($page);
+                   } 
+                   else{ 
+                   $page=1;
+                   };  
               
-              
+                  
               if(isset($_POST['search']) && !empty($_POST['search'])){
                   $search=  $_POST['search'];
                   strtolower($search);
@@ -109,11 +124,18 @@
                 $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
 
                 }
+                
+                
+              
+                if($result = mysqli_query($conn, $sql)){
 
-                $result = mysqli_query($conn, $sql);
-                  
-                  $rows = mysqli_num_rows($result);
-                 
+                    $start_from = ($page-1) * $limit;  
+                    $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
+                    $rows = mysqli_num_rows($result);
+                }
+                $result = mysqli_query($conn,$sql);
+               
+
                 while($data = mysqli_fetch_array($result)){
                     // include 'img_Modal.php'; 
             ?>
@@ -135,6 +157,20 @@
             </tr>
             <?php  } ?>
         </table>
+        <?php  
+            $sql = "SELECT COUNT(sno) FROM `data`"; 
+            $result_db = mysqli_query($conn,$sql);
+             
+            $row_db = mysqli_fetch_row($result_db);  
+            $total_records = $row_db[0];  
+            $total_pages = ceil($total_records / $limit); 
+            /* echo  $total_pages; */
+            $pagLink = "<ul class='pagination'>";  
+            for ($i=1; $i<=$total_pages; $i++) {
+                        $pagLink .= "<li class='page-item'><a class='page-link' href='index.php?page=".$i."'>".$i."</a></li>";	
+            }
+            echo $pagLink . "</ul>";  
+        ?>
 
         <?php echo "<b>Total no of rows:" .$rows . "</b>" ; ?>
 
