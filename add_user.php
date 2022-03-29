@@ -75,8 +75,8 @@ if(isset($_GET['sno'])){
 
             <div class="mb-3">
                 <label for="mobileNo" class="form-label">Mobile No</label>
-                <input type="BIGINT" class="form-control" id="phoneNo"
-                    value="<?php if(isset($row)){ echo $row['phone']; }?>" name="phone">
+                <input type="number" class="form-control" id="phoneNo"
+                    value="<?php if(isset($row)){ echo $row['phone']; }?>" maxlength='10' name="phone">
 
             </div>
 
@@ -94,7 +94,7 @@ if(isset($_GET['sno'])){
 
             <div class="mb-3">
                 <br>
-                <input type="file" class="form-control" id="img" name="image" accept="image/x-png,image/gif,image/jpeg">
+                <input type="file" class="form-control" id="img"  name="image" accept="image/x-png,image/gif,image/jpeg">
 
             </div>
             <input type="hidden" value="<?php if(isset($row)){ echo $row['sno']; }?>" name="sno">

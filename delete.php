@@ -11,17 +11,21 @@
             $image = $data['image'];
             $image_Path = "image/".basename($image);
            $sql = "DELETE FROM `data` WHERE sno='$sno'";
+            // echo  '<script> comfirm("really! want to delete?") ;</script>';
+            if ('<script> comfirm("really! want to delete?") ;</script>'){
+
             
            if(basename($image_Path)== $image){
             unlink($image_Path);
             $result = mysqli_query($conn, $sql);
-            header("location:index.php");
+           
+             
            }
-      
+            header("location:index.php");}
         }
         else{
            
-            echo  '<script> alert("try again! image not deleted.") ;</script>';
+            
         }
     }
     

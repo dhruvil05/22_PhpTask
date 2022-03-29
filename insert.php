@@ -44,11 +44,11 @@ $name = $phone = $email = $gender = $image = "";
               date_default_timezone_set("Asia/Calcutta"); 
               $date = date('Y-m-d H:i:s');
               $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name', `created_date`='$date' WHERE `sno`='$sno'";
-              error_reporting(0);
-              if(unlink('image/' .basename($filename))||!'image/' .basename($filename)){
+              // error_reporting(0);
+              // if(unlink('image/' .basename($filename))||!'image/' .basename($filename)){
                 
-                echo  '<script> alert("image deleted success fully") ;</script>';
-              }
+                
+              // }
                   
               
             }else{
@@ -61,11 +61,9 @@ $name = $phone = $email = $gender = $image = "";
                 mysqli_query($conn, $sql);
 
                 header("Location: index.php");
-            }else{
-                echo  '<script> alert("please! insert image.") ;</script>';
             }
 
 } 
 
 
-?>
+?>`
