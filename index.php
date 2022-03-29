@@ -80,9 +80,7 @@
         </form>
 
     </div>
-    <?php
-   
-    ?>
+    
 
 
 
@@ -108,7 +106,7 @@
                    } 
                    else{ 
                    $page=1;
-                   };  
+                   } 
               
                   
               if(isset($_POST['search']) && !empty($_POST['search'])){
@@ -131,9 +129,9 @@
 
                     $start_from = ($page-1) * $limit;  
                     $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
-                    $rows = mysqli_num_rows($result);
                 }
                 $result = mysqli_query($conn,$sql);
+                $rows = mysqli_num_rows($result);
                
 
                 while($data = mysqli_fetch_array($result)){
