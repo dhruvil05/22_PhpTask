@@ -75,7 +75,7 @@ if(isset($_GET['sno'])){
 
             <div class="mb-3">
                 <label for="mobileNo" class="form-label">Mobile No</label>
-                <input type="tell" class="form-control" id="phoneNo"
+                <input type="BIGINT" class="form-control" id="phoneNo"
                     value="<?php if(isset($row)){ echo $row['phone']; }?>" name="phone">
 
             </div>

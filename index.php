@@ -39,6 +39,10 @@
         width: 200px;
         height: 100px;
     }
+    td>img:hover {
+        width: 300px;
+        height: 300px;
+    }
 
     td>a {
         text-decoration: none;
@@ -105,6 +109,7 @@
                 $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
 
                 }
+
                 $result = mysqli_query($conn, $sql);
                   
                   $rows = mysqli_num_rows($result);
