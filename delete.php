@@ -20,7 +20,8 @@
       
         }
         else{
-            echo "sorry! your data not deleted. ";
+           
+            echo  '<script> alert("try again! image not deleted.") ;</script>';
         }
     }
     

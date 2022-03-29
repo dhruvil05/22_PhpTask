@@ -99,7 +99,7 @@ if(isset($_GET['sno'])){
             </div>
             <input type="hidden" value="<?php if(isset($row)){ echo $row['sno']; }?>" name="sno">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-            <a href="index.php?page=1"><button type="button" class="btn btn-secondary" id="close">Cancel</button></a>
+            <a href="index.php"><button type="button" class="btn btn-secondary" id="close">Cancel</button></a>
         </form>
     </div>
 

@@ -65,6 +65,9 @@
     .btn {
         width: 100px;
     }
+    .pagination{
+        float:right;
+    }
     </style>
 </head>
 
@@ -80,7 +83,7 @@
         </form>
 
     </div>
-    
+
 
 
 
@@ -102,12 +105,13 @@
     
                if (isset($_GET["page"])) {
                    $page  = $_GET["page"]; 
-                //    var_dump($page);
+                //    var_dump($page); 
+                   
                    } 
                    else{ 
                    $page=1;
+                   
                    } 
-              
                   
               if(isset($_POST['search']) && !empty($_POST['search'])){
                   $search=  $_POST['search'];
@@ -116,22 +120,38 @@
                
 
                   $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
+
+                 
                
               }
               else{
                 $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
 
-                }
-                
-                
-              
-                if($result = mysqli_query($conn, $sql)){
-
-                    $start_from = ($page-1) * $limit;  
+                    if($result = mysqli_query($conn, $sql)){
+                    
+                        $start_from = ($page-1) * $limit;
                     $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
+                    $result = mysqli_query($conn,$sql);
+                    
+                    
+                    }
                 }
-                $result = mysqli_query($conn,$sql);
-                $rows = mysqli_num_rows($result);
+                $result = mysqli_query($conn, $sql);
+               
+                
+                // if($result = mysqli_query($conn, $sql)){
+                   
+                //     $start_from = ($page-1) * $limit;
+                //    $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
+                //    $result = mysqli_query($conn,$sql);
+                  
+                   
+                // }
+                 $rows = mysqli_num_rows($result);
+              
+                
+                
+                
                
 
                 while($data = mysqli_fetch_array($result)){
