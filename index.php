@@ -31,9 +31,10 @@
         border-bottom: 1px solid black;
     }
 
-    /* td>a {
+    .heading>a {
         text-decoration: none;
-    } */
+        color: black;
+    }
 
     td>img {
         width: 200px;
@@ -55,7 +56,6 @@
         left: 10px;
         top: 40px;
 
-
     }
 
     td>a:hover {
@@ -65,15 +65,16 @@
     .btn {
         width: 100px;
     }
-    .pagination{
-        float:right;
+
+    .pagination {
+        float: right;
     }
     </style>
 </head>
 
 <body>
 
-    <h2 class="heading">User List</h2>
+    <h2 class="heading"><a href="index.php"> User List</a></h2>
     <div class="mb-3 div1">
 
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
@@ -168,7 +169,8 @@
                     <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
                 </td>
                 <td><?php echo $data['created_date']; ?></td>
-                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" style="background-color:red;">Delete</a></td>
+                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
+                        style="background-color:red;">Delete</a></td>
                 <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
 
 

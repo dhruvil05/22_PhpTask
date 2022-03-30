@@ -15,11 +15,14 @@
        
 
             
-           if(basename($image_Path)== $image){
-            unlink($image_Path);
-            $result = mysqli_query($conn, $sql);
-           
-             
+           if($result = mysqli_query($conn, $sql) ){
+               if(basename($image_Path)== $image){
+                   unlink($image);
+               }
+               else{
+                unlink($image);
+               }
+            
            }
         
             header("location:index.php");
