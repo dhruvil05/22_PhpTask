@@ -11,8 +11,8 @@
             $image = $data['image'];
             $image_Path = "image/".basename($image);
            $sql = "DELETE FROM `data` WHERE sno='$sno'";
-            // echo  '<script> comfirm("really! want to delete?") ;</script>';
-            if ('<script> comfirm("really! want to delete?") ;</script>'){
+            
+       
 
             
            if(basename($image_Path)== $image){
@@ -21,7 +21,8 @@
            
              
            }
-            header("location:index.php");}
+        
+            header("location:index.php");
         }
         else{
            
@@ -29,9 +30,9 @@
         }
     }
     
- 
+
 ?>
-   <!-- if(basename($image_Path)== $filename){
+<!-- if(basename($image_Path)== $filename){
         }
         else{
           echo  '<script> alert("file is alredy deleted.") ;</script>';
