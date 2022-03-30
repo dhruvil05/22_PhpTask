@@ -12,6 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 
     <title>Hello, world!</title>
@@ -85,23 +87,14 @@
 
     </div>
 
+    <?php 
+        // $columns = array('name','phone','email','gender','image','created_date');
+                        
+        // $column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column'] : $columns[5];
+
+        // $sort_order = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
 
 
-
-    <div class="container">
-        <table class="table table-bordered border-primary" id="myTable">
-            <tr>
-                <!-- <th>id</th> -->
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Image</th>
-                <th>Created date</th>
-                <th>Delete</th>
-                <th>Edit</th>
-            </tr>
-            <?php
                $limit = 10;  
     
                if (isset($_GET["page"])) {
@@ -113,51 +106,77 @@
                    $page=1;
                    
                    } 
-                  
-              if(isset($_POST['search']) && !empty($_POST['search'])){
-                  $search=  $_POST['search'];
-                  strtolower($search);
-                //   var_dump($search);
-               
-
-                  $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
-
-                 
-               
-              }
-              else{
-                $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
-
-                    if($result = mysqli_query($conn, $sql)){
-                    
-                        $start_from = ($page-1) * $limit;
-                    $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
-                    $result = mysqli_query($conn,$sql);
-                    
-                    
-                    }
-                }
-                $result = mysqli_query($conn, $sql);
-               
                 
-                // if($result = mysqli_query($conn, $sql)){
                    
-                //     $start_from = ($page-1) * $limit;
-                //    $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
-                //    $result = mysqli_query($conn,$sql);
                   
-                   
-                // }
-                 $rows = mysqli_num_rows($result);
-              
-                
-                
-                
-               
+                            if(isset($_POST['search']) && !empty($_POST['search'])){
+                                $search=  $_POST['search'];
+                                strtolower($search);
+                                //   var_dump($search);
+                            
 
+                                $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
+
+                                
+                            
+                            }
+                            else{
+                                $sql = "SELECT * FROM `data` ORDER BY created_date DESC;";
+
+                                    if($result = mysqli_query($conn, $sql)){
+                                    
+                                        $start_from = ($page-1) * $limit;
+                                        $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC LIMIT $start_from, $limit ;";
+                                        $result = mysqli_query($conn,$sql);
+                                    
+                                    }  
+                            }
+                            
+                            // $sql = "SELECT * FROM `data` ORDER BY  $column , $sort_order ;";
+                            // $result = mysqli_query($conn, $sql);
+
+                            // if ($result = mysqli_query($conn, $sql)) {
+                            //     // Some variables we need for the table.
+                            //     $up_or_down = str_replace(array('ASC','DESC'), array('up','down'), $sort_order); 
+                            //     $asc_or_desc = $sort_order == 'ASC' ? 'desc' : 'asc';
+                            //     $add_class = ' class="highlight"';
+                                
+                            // }
+                            $result = mysqli_query($conn, $sql);
+                            $rows = mysqli_num_rows($result);
+                           
+             ?>
+    <div class="container">
+        <table class="table table-bordered border-primary" id="myTable">
+            <tr>
+                <!-- <th>id</th> -->
+                <th><a href="index.php?column=name&order=<?php echo $asc_or_desc; ?>">Name<i
+                            class="fas fa-sort<?php echo $column == 'name' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+                <th><a href="index.php?column=phone&order=<?php echo $asc_or_desc; ?>">Phone<i
+                            class="fas fa-sort<?php echo $column == 'phone' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+                <th><a href="index.php?column=email&order=<?php echo $asc_or_desc; ?>">Email<i
+                            class="fas fa-sort<?php echo $column == 'email' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+                <th><a href="index.php?column=gender&order=<?php echo $asc_or_desc; ?>">Gender<i
+                            class="fas fa-sort<?php echo $column == 'gender' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+                <th><a href="index.php?column=image&order=<?php echo $asc_or_desc; ?>">Image<i
+                            class="fas fa-sort<?php echo $column == 'image' ? '-' . $up_or_down : ''; ?>"></i></a></th>
+                <th><a href="index.php?column=created_date&order=<?php echo $asc_or_desc; ?>">Created date<i
+                            class="fas fa-sort<?php echo $column == 'created_date' ? '-' . $up_or_down : ''; ?>"></i></a>
+                </th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+
+
+
+
+
+
+            <?php         
                 while($data = mysqli_fetch_array($result)){
                     // include 'img_Modal.php'; 
             ?>
+
 
             <tr class="data">
 
