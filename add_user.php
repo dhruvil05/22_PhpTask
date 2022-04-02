@@ -74,9 +74,10 @@ if(isset($_GET['sno'])){
             </div>
 
             <div class="mb-3">
+                
                 <label for="mobileNo" class="form-label">Mobile No</label>
                 <input type="number" class="form-control" id="phoneNo"
-                    value="<?php if(isset($row)){ echo $row['phone']; }?>" maxlength='10' name="phone">
+                    value="<?php if(isset($row)){ echo $row['phone']; }?>"  max='9999999999' name="phone">
 
             </div>
 

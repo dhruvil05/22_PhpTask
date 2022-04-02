@@ -15,19 +15,19 @@ $name = $phone = $email = $gender = $image = "";
 
         if (empty($_POST["username"])) {
             $nameErr = "is required";
-         } else {
+        } else {
            $name = $_POST["username"];
            
-         }
-         if (empty($_POST["email"])) {
+        }
+        if (empty($_POST["email"])) {
              $emailErr = "is required";
-          } else {
+        } else {
             $email = $_POST["email"];
             
-          }
+        }
          
-          $phone = $_POST['phone'];
-          $gender = $_POST['gender'];
+        $phone = $_POST['phone'];
+        $gender = $_POST['gender'];
           
          
        
@@ -50,29 +50,24 @@ $name = $phone = $email = $gender = $image = "";
                   $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender', `image`='$Get_image_name', `created_date`='$date' WHERE `sno`='$sno'";
                   unlink('image/' .basename($filename));
                   
-                }else{
-                  $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender',`image`='$filename', `created_date`='$date' WHERE `sno`='$sno'";
                 }
-              // error_reporting(0);
-              // if(unlink('image/' .basename($filename))||!'image/' .basename($filename)){
-                
-              //   echo  '<script> alert("really! want to delete?") ;</script>';
-              // }
-                  
-              
-            }else{
+                else
+                {
+                  $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender',`image`='$filename', `created_date`='$date' WHERE `sno`='$sno'";
+                }  
+            }
+            else
+            {
               
               $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
             }
-           
+            move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
             if ($result= mysqli_query($conn, $sql)) {
                 
-              move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
-
                 header("Location: index.php");
             }
 
 } 
 
 
-?>`
+?>
