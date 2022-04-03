@@ -61,8 +61,8 @@ $name = $phone = $email = $gender = $image = "";
               
               $sql = "INSERT INTO `data` (`name`, `phone`, `email`, `gender`, `image`) VALUES ('$name', '$phone', '$email', '$gender', '$Get_image_name')";
             }
-            move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
             if ($result= mysqli_query($conn, $sql)) {
+              move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
                 
                 header("Location: index.php");
             }
