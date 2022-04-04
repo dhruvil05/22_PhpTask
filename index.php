@@ -79,7 +79,7 @@
         </div>
 
         <?php 
-            $columns = array('name','phone','email','gender','image','created_date');
+            
 
             $limit = 10;  
             $page = isset($_GET["page"]) ? $_GET["page"] : 1;
@@ -91,9 +91,10 @@
 
             }
             elseif(isset($_GET["order"])){
+                $columns = array('name','phone','email','gender','image','created_date');
                 $order = isset($_GET['order']) && strtolower($_GET['order']) == 'desc' ? 'DESC' : 'ASC';
-                $column = isset($_GET['column']) && in_array($_GET['column'], $columns) 
-                                ? $_GET['column']:$column[5];
+                $column = isset($_GET['column']) && in_array($_GET['column'], $columns) ? $_GET['column']:$column[5];
+
                 $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC;";
                 if($result = mysqli_query($conn, $sql))
                 {
@@ -115,21 +116,21 @@
             }                
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
-                $orderdesc = 'desc';
+                // $orderdesc = 'desc';
             ?>
-            <div class="container">
+        <div class="container">
             <table class="table table-bordered border-primary" id="myTable">
                 <!-- table headers -->
                 <tr>
-                    <th><a href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : $orderdesc;?>">Name<i 
+                    <th><a href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : 'desc';?>">Name<i 
                             class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Phone<i
+                    <th><a href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Phone<i
                                 class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Email<i
+                    <th><a href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Email<i
                                 class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Gender<i
+                    <th><a href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Gender<i
                                 class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Image<i
+                    <th><a href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Image<i
                                 class="fas fa-sort"></i></a></th>
                     <th><a href="index.php?column=created_date&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Created date<i
                                 class="fas fa-sort"></i></a>
@@ -139,19 +140,19 @@
                 </tr>
                 <!--  table data rows  -->
                 <?php while($data = mysqli_fetch_array($result)){?>
-                <tr class="data">
-                    <td><?php echo $data['name']; ?></td>
-                    <td><?php echo $data['phone']; ?></td>
-                    <td><?php echo $data['email']; ?></td>
-                    <td><?php echo $data['gender']; ?></td>
-                    <td style="justify-content: center; display: flex;">
-                        <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
-                    </td>
-                    <td><?php echo $data['created_date']; ?></td>
-                    <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
-                            style="background-color:red;">Delete</a></td>
-                    <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
-                </tr>
+                    <tr class="data">
+                        <td><?php echo $data['name']; ?></td>
+                        <td><?php echo $data['phone']; ?></td>
+                        <td><?php echo $data['email']; ?></td>
+                        <td><?php echo $data['gender']; ?></td>
+                        <td style="justify-content: center; display: flex;">
+                            <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
+                        </td>
+                        <td><?php echo $data['created_date']; ?></td>
+                        <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
+                                style="background-color:red;">Delete</a></td>
+                        <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
+                    </tr>
                 <?php  } ?>
             </table>
             <?php  
@@ -161,9 +162,8 @@
                 $row_db = mysqli_fetch_row($result_db);  
                 $total_records = $row_db[0];  
                 $total_pages = ceil($total_records / $limit); 
-                /* echo  $total_pages; */
                 $pagLink = "<ul class='pagination'>";  
-                for ($i=1; $i<=$total_pages; $i++) {
+                for ($i=1; $i<=$total_pages; $i++){
                             $pagLink .= "<li class='page-item'><a class='page-link' href='index.php?page=".$i."'>".$i."</a></li>";	
                 }
                 echo $pagLink . "</ul>";  

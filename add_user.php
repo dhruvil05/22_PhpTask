@@ -14,7 +14,7 @@ require 'db_connect.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>fill the form</title>
+    <title>add data</title>
 
     <style>
     .container {
@@ -34,13 +34,10 @@ require 'db_connect.php';
 if(isset($_GET['sno'])){
     
     $sno = $_GET['sno'];
-    
     $sql = "SELECT * FROM `data` WHERE `sno` = $sno";
-    
+
     $result= mysqli_query($conn, $sql);
-    if(!$result){
-        echo("Error description: " . mysqli_error($conn));
-    }
+    
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     // var_dump($row);
 }
@@ -76,6 +73,9 @@ if(isset($_GET['sno'])){
             <div class="mb-3">
                 
                 <label for="mobileNo" class="form-label">Mobile No</label>
+                <span class="error">*
+                    <?php echo $phoneErr;?>
+                </span>
                 <input type="number" class="form-control" id="phoneNo"
                     value="<?php if(isset($row)){ echo $row['phone']; }?>"  max='9999999999' name="phone">
 

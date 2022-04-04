@@ -17,7 +17,7 @@ $name = $phone = $email = $gender = $image = "";
             $nameErr = "is required";
         } else {
            $name = $_POST["username"];
-           
+          
         }
         if (empty($_POST["email"])) {
              $emailErr = "is required";
@@ -37,11 +37,12 @@ $name = $phone = $email = $gender = $image = "";
         
         
         $Get_image_name = $_FILES['image']['name'];
-        var_dump($Get_image_name);
+        // var_dump($Get_image_name);
         
         $image_Path = "image/".basename($Get_image_name);
-        var_dump($image_Path);
+        // var_dump($image_Path);
         if(isset($_POST['sno'])&& $_POST['sno']>0){
+          
               $sno = $_POST['sno'];
               $sqlget = "SELECT * FROM `data` WHERE `sno` = $sno";
               $result= mysqli_query($conn, $sqlget);
@@ -60,6 +61,7 @@ $name = $phone = $email = $gender = $image = "";
                 {
                   $sql = "UPDATE `data` SET `name`='$name', `email`='$email', `phone`= '$phone', `gender`='$gender',`image`='$filename', `created_date`='$date' WHERE `sno`='$sno'";
                 }  
+
         }
         else
         {
@@ -68,12 +70,12 @@ $name = $phone = $email = $gender = $image = "";
         }
 
             
-        if ($result= mysqli_query($conn, $sql) ) {
-          
+        if ( !empty($name)&&!empty($email)&& !empty($phone) ) {
           move_uploaded_file($_FILES['image']['tmp_name'], $image_Path);
-
+          $result= mysqli_query($conn, $sql);
           header("Location: index.php");
         }
+
     } 
 
 
