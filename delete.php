@@ -35,9 +35,3 @@
     
 
 ?>
-<!-- if(basename($image_Path)== $filename){
-        }
-        else{
-          echo  '<script> alert("file is alredy deleted.") ;</script>';
-          header("location: index.php");
-        } -->
