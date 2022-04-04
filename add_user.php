@@ -26,6 +26,10 @@ require 'db_connect.php';
     .error {
         color: red;
     }
+
+    .form-control {
+        
+    }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -71,13 +75,13 @@ if(isset($_GET['sno'])){
             </div>
 
             <div class="mb-3">
-                
+
                 <label for="mobileNo" class="form-label">Mobile No</label>
                 <span class="error">*
                     <?php echo $phoneErr;?>
                 </span>
                 <input type="number" class="form-control" id="phoneNo"
-                    value="<?php if(isset($row)){ echo $row['phone']; }?>"  max='9999999999' name="phone">
+                    value="<?php if(isset($row)){ echo $row['phone']; }?>" max='9999999999' min='1000000000' name="phone">
 
             </div>
 
@@ -95,7 +99,7 @@ if(isset($_GET['sno'])){
 
             <div class="mb-3">
                 <br>
-                <input type="file" class="form-control" id="img"  name="image" accept="image/x-png,image/gif,image/jpeg">
+                <input type="file" class="form-control" id="img" name="image" accept="image/x-png,image/gif,image/jpeg">
 
             </div>
             <input type="hidden" value="<?php if(isset($row)){ echo $row['sno']; }?>" name="sno">

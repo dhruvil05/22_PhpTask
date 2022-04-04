@@ -48,7 +48,7 @@ $name = $phone = $email = $gender = $image = "";
               $result= mysqli_query($conn, $sqlget);
               $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
               $filename= $row['image'];
-              var_dump($filename);
+              // var_dump($filename);
               date_default_timezone_set("Asia/Calcutta"); 
               $date = date('Y-m-d H:i:s');
 

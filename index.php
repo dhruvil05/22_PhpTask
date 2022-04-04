@@ -73,8 +73,10 @@
         <div class="mb-3 div1">
             <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
             <form class="d-flex mx-3" action="index.php" method="post">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit" value="search">Search</button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"  >
+                <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
+                <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button>
+
             </form>
         </div>
 
@@ -117,7 +119,7 @@
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
                 // $orderdesc = 'desc';
-            ?>
+        ?>
         <div class="container">
             <table class="table table-bordered border-primary" id="myTable">
                 <!-- table headers -->
@@ -149,6 +151,7 @@
                             <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
                         </td>
                         <td><?php echo $data['created_date']; ?></td>
+                        
                         <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
                                 style="background-color:red;">Delete</a></td>
                         <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>

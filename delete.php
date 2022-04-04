@@ -10,7 +10,7 @@
         if($sno == $data['sno']){
             $image = $data['image'];
             $image_Path = "image/".basename($image);
-           $sql = "DELETE FROM `data` WHERE sno='$sno'";
+            $sql = "DELETE FROM `data` WHERE sno='$sno'";
             
        
 
@@ -24,7 +24,6 @@
                }
             
            }
-        
             header("location:index.php");
         }
         else{
