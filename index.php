@@ -68,19 +68,12 @@
     }
     </style>
 </head>
-    <body>
-        <h2 class="heading"><a href="index.php"> User List</a></h2>
-        <div class="mb-3 div1">
-            <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-            <form class="d-flex mx-3" action="index.php" method="post">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"  >
-                <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
-                <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button>
 
-            </form>
-        </div>
+<body>
+    <h2 class="heading"><a href="index.php"> User List</a></h2>
 
-        <?php 
+
+    <?php 
             
 
             $limit = 10;  
@@ -119,46 +112,62 @@
                 $result = mysqli_query($conn, $sql);
                 $rows = mysqli_num_rows($result);
                 // $orderdesc = 'desc';
+                
         ?>
-        <div class="container">
-            <table class="table table-bordered border-primary" id="myTable">
-                <!-- table headers -->
-                <tr>
-                    <th><a href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : 'desc';?>">Name<i 
+    <div class="mb-3 div1">
+        <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
+        <form class="d-flex mx-3" action="index.php" method="post">
+            <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
+            <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button>
+
+        </form>
+    </div>
+    <div class="container">
+        <table class="table table-bordered border-primary" id="myTable">
+            <!-- table headers -->
+            <tr>
+                <th><a
+                        href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : 'desc';?>">Name<i
                             class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Phone<i
-                                class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Email<i
-                                class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Gender<i
-                                class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Image<i
-                                class="fas fa-sort"></i></a></th>
-                    <th><a href="index.php?column=created_date&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Created date<i
-                                class="fas fa-sort"></i></a>
-                    </th>
-                    <th>Delete</th>
-                    <th>Edit</th>
-                </tr>
-                <!--  table data rows  -->
-                <?php while($data = mysqli_fetch_array($result)){?>
-                    <tr class="data">
-                        <td><?php echo $data['name']; ?></td>
-                        <td><?php echo $data['phone']; ?></td>
-                        <td><?php echo $data['email']; ?></td>
-                        <td><?php echo $data['gender']; ?></td>
-                        <td style="justify-content: center; display: flex;">
-                            <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
-                        </td>
-                        <td><?php echo $data['created_date']; ?></td>
-                        
-                        <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
-                                style="background-color:red;">Delete</a></td>
-                        <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
-                    </tr>
-                <?php  } ?>
-            </table>
-            <?php  
+                <th><a
+                        href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Phone<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Email<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Gender<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Image<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=created_date&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Created
+                        date<i class="fas fa-sort"></i></a>
+                </th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+            <!--  table data rows  -->
+            <?php while($data = mysqli_fetch_array($result)){?>
+            <tr class="data">
+                <td><?php echo $data['name']; ?></td>
+                <td><?php echo $data['phone']; ?></td>
+                <td><?php echo $data['email']; ?></td>
+                <td><?php echo $data['gender']; ?></td>
+                <td style="justify-content: center; display: flex;">
+                    <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
+                </td>
+                <td><?php echo $data['created_date']; ?></td>
+
+                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
+                        style="background-color:red;">Delete</a></td>
+                <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
+            </tr>
+            <?php  } ?>
+        </table>
+        <?php  
                 $sql = "SELECT COUNT(sno) FROM `data`"; 
                 $result_db = mysqli_query($conn,$sql);
                 
@@ -171,10 +180,11 @@
                 }
                 echo $pagLink . "</ul>";  
             ?>
-            <?php echo "<b>Total no of rows:" .$rows . "</b>" ; ?>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-        </script>
-    </body>
+        <?php echo "<b>Total no of rows:" .$rows . "</b>" ; ?>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+</body>
+
 </html>
