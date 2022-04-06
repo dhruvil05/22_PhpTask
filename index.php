@@ -118,18 +118,45 @@
         ?>
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="index.php" method="post">
+        <form class="d-flex mx-3" action="index.php?search=<?php echo $search; ?>" method="post">
+
+            <input class="form-control me-2" type="hidden" placeholder="search" aria-label="Search" name="search">
             <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" name="search">
             <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
-            <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button>
+            <!-- <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button> -->
 
         </form>
     </div>
     <div class="container">
-        <?php while($data = mysqli_fetch_array($result)){?>
         <table class="table table-bordered border-primary" id="myTable">
-         
-        </table><?php  } ?>
+
+            <th> Name </th>
+            <th> Phone </th>
+            <th> Email </th>
+            <th> Gender </th>
+            <th> Image </th>
+            <th> Created date </th>
+            <th> Delete </th>
+            <th> Edit </th>
+
+
+            <?php while($data = mysqli_fetch_array($result)){?>
+            <tr class="data">
+                <td><?php echo $data['name']; ?></td>
+                <td><?php echo $data['phone']; ?></td>
+                <td><?php echo $data['email']; ?></td>
+                <td><?php echo $data['gender']; ?></td>
+                <td style="justify-content: center; display: flex;">
+                    <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
+                </td>
+                <td><?php echo $data['created_date']; ?></td>
+
+                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
+                        style="background-color:red;">Delete</a></td>
+                <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
+            </tr>
+            <?php  } ?>
+        </table>
         <?php  
                 $sql = "SELECT COUNT(sno) FROM `data`"; 
                 $result_db = mysqli_query($conn,$sql);
