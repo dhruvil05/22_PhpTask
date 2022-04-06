@@ -87,7 +87,7 @@ if(isset($_GET['sno'])){
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id=" gendermale"
-                    <?php if(isset($row)&&$row['gender']== 'male'){?> checked <?php  }?> value="male">
+                    <?php if(isset($row)&&$row['gender'] == 'male'){?> checked <?php  }?> value="male">
                 <label class=" form-check-label" for="flexRadioDefault1">Male</label>
             </div>
             <div class="form-check">

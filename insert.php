@@ -11,7 +11,6 @@ $name = $phone = $email = $gender = $image = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
 
-    
 
         if (empty($_POST["username"])) {
             $nameErr = "is required";
@@ -30,9 +29,7 @@ $name = $phone = $email = $gender = $image = "";
         } else {
           $phone = $_POST['phone'];
             
-        }
-        
-        
+        }  
         $gender = $_POST['gender'];
         
         
