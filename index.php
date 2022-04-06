@@ -118,9 +118,9 @@
         ?>
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="index.php?search=<?php echo $search; ?>" method="post">
+        <form class="d-flex mx-3" action="index.php?search=<?php echo $search;?>" method="post">
+        <input class="form-control me-2" type="hidden" placeholder="search" aria-label="Search" name="search">
 
-            <input class="form-control me-2" type="hidden" placeholder="search" aria-label="Search" name="search">
             <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" name="search">
             <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
             <!-- <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button> -->
@@ -129,16 +129,29 @@
     </div>
     <div class="container">
         <table class="table table-bordered border-primary" id="myTable">
-
-            <th> Name </th>
-            <th> Phone </th>
-            <th> Email </th>
-            <th> Gender </th>
-            <th> Image </th>
-            <th> Created date </th>
-            <th> Delete </th>
-            <th> Edit </th>
-
+        <tr>
+                <th><a
+                        href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : 'desc';?>">Name<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Phone<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Email<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Gender<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Image<i
+                            class="fas fa-sort"></i></a></th>
+                <th><a
+                        href="index.php?column=created_date&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Created
+                        date<i class="fas fa-sort"></i></a>
+                </th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
 
             <?php while($data = mysqli_fetch_array($result)){?>
             <tr class="data">
