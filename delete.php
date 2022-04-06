@@ -16,12 +16,12 @@
 
             
            if($result = mysqli_query($conn, $sql) ){
-               if(basename($image_Path)== $image){
+            //    if(basename($image_Path)== $image){
                    unlink($image);
-               }
-               else{
-                unlink($image);
-               }
+            //    }
+            //    else{
+            //     unlink($image_Path);
+            //    }
             
            }
             header("location:index.php");
