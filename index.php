@@ -9,9 +9,11 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <title>Listing Page</title>
     <style>
     .div1 {
@@ -124,49 +126,10 @@
         </form>
     </div>
     <div class="container">
+        <?php while($data = mysqli_fetch_array($result)){?>
         <table class="table table-bordered border-primary" id="myTable">
-            <!-- table headers -->
-            <tr>
-                <th><a
-                        href="index.php?column=name&order=<?php echo $orderbY = isset($_GET['order'])&&($_GET['order'] == 'desc')  ? 'asc' : 'desc';?>">Name<i
-                            class="fas fa-sort"></i></a></th>
-                <th><a
-                        href="index.php?column=phone&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Phone<i
-                            class="fas fa-sort"></i></a></th>
-                <th><a
-                        href="index.php?column=email&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Email<i
-                            class="fas fa-sort"></i></a></th>
-                <th><a
-                        href="index.php?column=gender&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Gender<i
-                            class="fas fa-sort"></i></a></th>
-                <th><a
-                        href="index.php?column=image&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : 'desc' ; ?>">Image<i
-                            class="fas fa-sort"></i></a></th>
-                <th><a
-                        href="index.php?column=created_date&order=<?php echo $orderbY= isset($_GET["order"])&&($_GET["order"] == 'desc')  ? 'asc' : $orderdesc ; ?>">Created
-                        date<i class="fas fa-sort"></i></a>
-                </th>
-                <th>Delete</th>
-                <th>Edit</th>
-            </tr>
-            <!--  table data rows  -->
-            <?php while($data = mysqli_fetch_array($result)){?>
-            <tr class="data">
-                <td><?php echo $data['name']; ?></td>
-                <td><?php echo $data['phone']; ?></td>
-                <td><?php echo $data['email']; ?></td>
-                <td><?php echo $data['gender']; ?></td>
-                <td style="justify-content: center; display: flex;">
-                    <img src="<?php  echo 'image/' .$data['image']; ; ?>" alt="image" class="img">
-                </td>
-                <td><?php echo $data['created_date']; ?></td>
-
-                <td><a href="delete.php?sno=<?php echo $data['sno']; ?>" onclick="return confirm('Are you sure?')"
-                        style="background-color:red;">Delete</a></td>
-                <td> <a href="add_user.php?sno=<?php echo $data['sno']; ?>" style="background-color:green">Edit</a></td>
-            </tr>
-            <?php  } ?>
-        </table>
+         
+        </table><?php  } ?>
         <?php  
                 $sql = "SELECT COUNT(sno) FROM `data`"; 
                 $result_db = mysqli_query($conn,$sql);
@@ -182,6 +145,11 @@
             ?>
         <?php echo "<b>Total no of rows:" .$rows . "</b>" ; ?>
     </div>
+    <script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
