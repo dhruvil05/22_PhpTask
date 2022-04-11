@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -118,12 +118,13 @@
         ?>
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="index.php?search=<?php echo $search;?>" method="post">
-        <input class="form-control me-2" type="hidden" placeholder="search" aria-label="Search" name="search">
+        <form class="d-flex mx-3" action="index.php" method="post">
+        
 
-            <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" name="search">
+            <input class="form-control me-2" type="text"  aria-label="Search" name="search" 
+            value="<?php if(isset($_POST['search'])){echo $search; }else{echo 'search';} ?>">
             <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
-            <!-- <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button> -->
+            <a href="http://localhost/php/phptask/"><button class="btn btn-outline-danger"  type="reset" value="reset">Reset</button></a>
 
         </form>
     </div>
@@ -190,6 +191,7 @@
         $('#myTable').DataTable();
     });
     </script>
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
