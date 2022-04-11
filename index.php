@@ -116,8 +116,8 @@
         ?>
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="index.php" method="post">
-            <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" name="search">
+        <form class="d-flex mx-3" action="index.php?search=<?php echo $search; ?>" method="post">
+            <input class="form-control me-2" type="text" placeholder="search" aria-label="Search" value="<?php if(isset($search)){echo $search;}else{echo '';} ?>" name="search">
             <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
             <button class="btn btn-outline-danger" type="reset" value="reset">Reset</button>
 
