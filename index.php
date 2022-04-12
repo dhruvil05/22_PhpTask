@@ -73,6 +73,18 @@
     <h2 class="heading"><a href="index.php"> User List</a></h2>
 
 
+
+    <div class="mb-3 div1">
+        <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
+        <form class="d-flex mx-3" action="index.php" method="post">
+            <input class="form-control me-2" type="text" aria-label="Search" name="search"
+                value="<?php if(isset($_POST['search']) && !empty($_POST['search'])){echo $search; }else{echo 'search';} ?>">
+            <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
+            <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset"
+                value="reset">Reset</a>
+
+        </form>
+    </div>
     <?php 
             
 
@@ -114,17 +126,9 @@
                 // $orderdesc = 'desc';
                 
         ?>
-    <div class="mb-3 div1">
-        <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
-        <form class="d-flex mx-3" action="index.php" method="post">
-        <input class="form-control me-2" type="text"  aria-label="Search" name="search" 
-            value="<?php if(isset($_POST['search']) && !empty($_POST['search'])){echo $search; }else{echo 'search';} ?>">            
-            <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
-            <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset" value="reset">Reset</a>
-
-        </form>
-    </div>
     <div class="container">
+        <!-- <div class="contain" onload>
+       </div> -->
         <table class="table table-bordered border-primary" id="myTable">
             <!-- table headers -->
             <tr>
@@ -183,9 +187,25 @@
             ?>
         <?php echo "<b>Total no of rows:" .$rows . "</b>" ; ?>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+
+<!-- <script>
+const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+        if (str == "") {
+            document.getElementByClassName("container").innerHTML = "";
+            return;
+        }
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementByClassName("container").innerHTML = this.responseText;
+            print_r(this.responseText);
+        }
+        xhttp.open("GET", "listing.php");
+        xhttp.send();
+</script> -->
 
 </html>
