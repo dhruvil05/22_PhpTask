@@ -80,19 +80,19 @@
             
             
             
-            if(isset($_POST['search']) && !empty($_POST['search'])){
-                    $search=  $_POST['search'];
-                    strtolower($search);
-                    $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
+            // if(isset($_POST['search']) && !empty($_POST['search'])){
+            //         $search=  $_POST['search'];
+            //         strtolower($search);
+            //         $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
                 
-                }
+            //     }
                 
-            else
-            {
+            // else
+            // {
             $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC;";
                   
                     
-            }                
+            // }                
             $result = mysqli_query($conn, $sql);
             // $rows = mysqli_num_rows($result);
             
