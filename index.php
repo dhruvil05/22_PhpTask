@@ -133,9 +133,10 @@
                         <img src="image/'.$data["image"].'" alt="image" class="img">
                         </td>
                         <td>'.$data["created_date"].'</td>
-                        
-                        
-                        
+                        <td><a href="delete.php?sno='.$data['sno'].'" onclick="return confirm'.('Are you sure?').'"
+                        style="background-color:red;">Delete</a></td>
+                        <td> <a href="add_user.php?sno='. $data['sno'].'" style="background-color:green">Edit</a></td>
+            
                         </tr>';
                     } ;?>
             </table>
@@ -148,6 +149,7 @@
 </script>
 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 <script>
 $(document).ready(function() {
     $('#user_data').DataTable();
