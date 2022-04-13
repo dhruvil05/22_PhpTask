@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+    <!-- Datatable CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
@@ -76,39 +77,35 @@
 
 
     <?php 
-            
-            
-            
-            
-            // if(isset($_POST['search']) && !empty($_POST['search'])){
-            //         $search=  $_POST['search'];
-            //         strtolower($search);
-            //         $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
+           
+            if(isset($_POST['search']) && !empty($_POST['search'])){
+                    $search=  $_POST['search'];
+                    strtolower($search);
+                    $sql=" SELECT * FROM `data` WHERE `name` like '%".$search."%' OR `email` like '%".$search."%' OR `phone` like '%".$search."%' OR `gender` like '%".$search."%' OR `created_date` like '%".$search."%' OR `image` like '%".$search."%' ORDER BY `created_date` DESC;";
                 
-            //     }
-                
-            // else
-            // {
-            $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC;";
-                  
-                    
-            // }                
+            }   
+            else
+            {
+                $sql = "SELECT * FROM `data` ORDER BY `created_date` DESC;";
+            }                
             $result = mysqli_query($conn, $sql);
-            // $rows = mysqli_num_rows($result);
+            $rows = mysqli_num_rows($result);
             
                 ?>
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
         <form class="d-flex mx-3" action="index.php" method="post">
-            <input class="form-control me-2" type="text" aria-label="Search" name="search"
+            <input class="form-control me-2" type="text" aria-label="Search" id='searching' name="search"
                 value="<?php if(isset($_POST['search']) && !empty($_POST['search'])){echo $search; }else{echo 'search';} ?>">
-            <button class="btn btn-outline-success mx-3" type="submit" value="search">Search</button>
+            <button class="btn btn-outline-success mx-3" type="submit" value="search" id="search">Search</button>
             <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset"
                 value="reset">Reset</a>
 
         </form>
     </div>
+
     <div class="container table-responsive">
+
         <div class="table-responsive">
             <table class="table table-bordered border-primary" id="user_data">
                 <thead>
@@ -119,7 +116,8 @@
                         <th>gender</th>
                         <th>image</th>
                         <th>created_date</th>
-
+                        <th>Delete</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <?php while($data = mysqli_fetch_array($result)){
@@ -138,7 +136,7 @@
                         <td> <a href="add_user.php?sno='. $data['sno'].'" style="background-color:green">Edit</a></td>
             
                         </tr>';
-                    } ;?>
+                } ;?>
             </table>
         </div>
 
@@ -148,11 +146,30 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
 
+<!-- Jquery library -->
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- Datatable JS -->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
 <script>
 $(document).ready(function() {
-    $('#user_data').DataTable();
+
+    $('#user_data').DataTable(
+        "searching": false,
+        "processing": true,
+        "serverSide": true,
+
+        $.ajax({
+            type: "GET",
+            url: "ajax_fetch.php",
+            dataType: "html",
+            success: function(data) {
+                $("#user_data").html(data);
+
+            }
+        });
+    );
+
 });
 </script>
 
