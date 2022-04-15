@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
     <title>Listing Page</title>
     <style>
     .div1 {
@@ -54,7 +56,6 @@
         color: white;
         position: relative;
         left: 10px;
-        top: 40px;
 
     }
 
@@ -76,7 +77,7 @@
     <h2 class="heading"><a href="index.php"> User List</a></h2>
 
 
-    <?php 
+    <!-- <?php 
            
             if(isset($_POST['search']) && !empty($_POST['search'])){
                     $search=  $_POST['search'];
@@ -91,15 +92,15 @@
             $result = mysqli_query($conn, $sql);
             $rows = mysqli_num_rows($result);
             
-                ?>
+                ?> -->
     <div class="mb-3 div1">
         <a type="button" href="add_user.php" class="btn btn-success float-right">ADD</a>
         <form class="d-flex mx-3" action="index.php" method="post">
             <input class="form-control me-2" type="text" aria-label="Search" id='searching' name="search"
-                value="<?php if(isset($_POST['search']) && !empty($_POST['search'])){echo $search; }else{echo 'search';} ?>">
+                placeholder="search">
             <button class="btn btn-outline-success mx-3" type="submit" value="search" id="search">Search</button>
-            <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset"
-                value="reset">Reset</a>
+            <!-- <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset"
+                value="reset">Reset</a> -->
 
         </form>
     </div>
@@ -107,7 +108,7 @@
     <div class="container table-responsive">
 
         <div class="table-responsive">
-            <table class="table table-bordered border-primary" id="user_data">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>name</th>
@@ -120,8 +121,8 @@
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <?php while($data = mysqli_fetch_array($result)){
-                
+                <tbody id="user_data">
+                    <!-- <?php while($data = mysqli_fetch_array($result)){
                 echo '<tr>
                         <td>'.$data["name"].'</td>
                         <td>'.$data["phone"].'</td>
@@ -131,46 +132,89 @@
                         <img src="image/'.$data["image"].'" alt="image" class="img">
                         </td>
                         <td>'.$data["created_date"].'</td>
-                        <td><a href="delete.php?sno='.$data['sno'].'" onclick="return confirm'.('Are you sure?').'"
+                        <td><a href="delete.php?sno='.$data['sno'].'" id="delete" onclick="return confirm'.('Are you sure?').'"
                         style="background-color:red;">Delete</a></td>
                         <td> <a href="add_user.php?sno='. $data['sno'].'" style="background-color:green">Edit</a></td>
             
                         </tr>';
-                } ;?>
+                } ;?> -->
+                </tbody>
             </table>
         </div>
 
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
-<!-- Jquery library -->
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- Datatable JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-
-<script>
+<!-- <script>
 $(document).ready(function() {
 
     $('#user_data').DataTable(
-        "searching": false,
-        "processing": true,
-        "serverSide": true,
+       
 
-        $.ajax({
-            type: "GET",
-            url: "ajax_fetch.php",
-            dataType: "html",
-            success: function(data) {
-                $("#user_data").html(data);
-
-            }
-        });
     );
 
 });
+</script> -->
+<script>
+$(document).ready(function() {
+
+    $('#searching').keyup(function() {
+        console.log($(this).val());
+        search = $(this).val();
+
+        getData(search);
+    });
+
+    function getData() {
+        if (search !== "") {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/php/phptask/fetch.php",
+                data: {
+                    search: search,
+                },
+                success: function(data) {
+                    $("#user_data").html(data);
+                }
+            });
+
+        } else {
+            search = ''
+            
+        }
+    }
+
+
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: "http://localhost/php/phptask/fetch.php",
+    //     data: {
+    //         search: search
+    //     },
+    //     cache: false,
+    //     success: function(data) {
+    //         // console.log(data);
+    //         $('#user_data').append(data)
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error(xhr);
+    //     }
+
+    // });
+
+
+
+
+});
+</script>
+<script>
+
 </script>
 
 
