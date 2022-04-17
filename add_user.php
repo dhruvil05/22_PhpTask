@@ -120,10 +120,10 @@ if(isset($_GET['sno'])){
             var phone = $("#phone").val();
             var email = $("#email").val();
             var gender = $("#gender:checked").val();
-            var image = $("#img").val();
-            imagename = image.split(/(\\|\/)/g).pop();
+            // var image = $("#img").val();
+            // imagename = image.split(/(\\|\/)/g).pop();
             // var fd = new FormData();
-            // var image = $('#img')[0].files;
+            var image = $('#img')[0].files;
 
 
 
@@ -166,15 +166,15 @@ if(isset($_GET['sno'])){
                 var phone = $("#phone").val();
                 var email = $("#email").val();
                 var gender = $("#gender:checked").val();
-                var image = $("#img").val();
-                imagename = image.split(/(\\|\/)/g).pop();
-                console.log(imagename)
-                // var fd = new FormData();
-                // var image = $('#img')[0].files;
-                // fd.append('img',image[0]);
-                // console.log(imagename)
-                // console.log(image)
-
+                var formData = new FormData();
+                var images = $('#img')[0].files;
+                formData.append('img', images[0]);
+                // formData.append('name',name);
+                // formData.append('phone',phone);
+                // formData.append('email',email);
+                // formData.append('gender',gender);
+                // console.log(formData);
+                // alert(formData);
                 $.ajax({
                     type: "POST",
                     url: "http://localhost/php/phptask/store.php",
@@ -183,23 +183,25 @@ if(isset($_GET['sno'])){
                         phone: phone,
                         email: email,
                         gender: gender,
-                        image:imagename,
                     },
-                    // contentType: false,
-                    // processData: false,
-                    cache: false,
                     success: function(data) {
+                        console.log(data);
                         alert('Record successfully inserted...');
-
+                        // header();
                     },
+
                     error: function(xhr, status, error) {
+                        alert(error);
                         console.error(xhr);
                     }
                 });
 
 
+
             }
         });
+
+        
     });
     </script>
 

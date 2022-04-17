@@ -48,7 +48,7 @@
         height: 300px;
     }
 
-    td>a {
+    td>button {
         text-decoration: none;
         border: 1px solid black;
         border-radius: 8px;
@@ -98,7 +98,7 @@
         <form class="d-flex mx-3" action="index.php" method="post">
             <input class="form-control me-2" type="text" aria-label="Search" id='searching' name="search"
                 placeholder="search">
-            <button class="btn btn-outline-success mx-3" type="submit" value="search" id="search">Search</button>
+            <button class="btn btn-outline-danger mx-3" type="submit" value="search" id="search">Reset</button>
             <!-- <a href="http://localhost/php/phptask/index.php" class="btn btn-outline-danger" type="reset"
                 value="reset">Reset</a> -->
 
@@ -122,22 +122,7 @@
                     </tr>
                 </thead>
                 <tbody id="user_data">
-                    <!-- <?php while($data = mysqli_fetch_array($result)){
-                echo '<tr>
-                        <td>'.$data["name"].'</td>
-                        <td>'.$data["phone"].'</td>
-                        <td>'.$data["email"].'</td>
-                        <td>'.$data["gender"].'</td>
-                        <td style="justify-content: center; display: flex;">
-                        <img src="image/'.$data["image"].'" alt="image" class="img">
-                        </td>
-                        <td>'.$data["created_date"].'</td>
-                        <td><a href="delete.php?sno='.$data['sno'].'" id="delete" onclick="return confirm'.('Are you sure?').'"
-                        style="background-color:red;">Delete</a></td>
-                        <td> <a href="add_user.php?sno='. $data['sno'].'" style="background-color:green">Edit</a></td>
-            
-                        </tr>';
-                } ;?> -->
+
                 </tbody>
             </table>
         </div>
@@ -145,7 +130,7 @@
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
@@ -164,13 +149,11 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     $('#searching').keyup(function() {
-        console.log($(this).val());
         search = $(this).val();
-
-        getData(search);
+        getSearchData(search);
     });
 
-    function getData() {
+    function getSearchData() {
         if (search !== "") {
             $.ajax({
                 type: "GET",
@@ -179,43 +162,63 @@ $(document).ready(function() {
                     search: search,
                 },
                 success: function(data) {
-                    $("#user_data").html(data);
+                    $('#user_data').html('')
+                    $("#user_data").append(data);
+                    $('.delete_record').click(function() {
+                        id = $(this).attr('data-id');
+                        deleteData(id)
+                    });
                 }
             });
-
-        } else {
-            search = ''
-            
         }
     }
 
+    function getListing() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/php/phptask/fetch.php",
+            data: {},
+            success: function(data) {
+                $('#user_data').html('')
+                $('#user_data').append(data)
+                $('.delete_record').click(function() {
 
+                    id = $(this).attr('data-id');
 
-    // $.ajax({
-    //     type: "GET",
-    //     url: "http://localhost/php/phptask/fetch.php",
-    //     data: {
-    //         search: search
-    //     },
-    //     cache: false,
-    //     success: function(data) {
-    //         // console.log(data);
-    //         $('#user_data').append(data)
-    //     },
-    //     error: function(xhr, status, error) {
-    //         console.error(xhr);
-    //     }
+                    deleteData(id)
 
-    // });
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr);
+            }
 
+        });
+    }
+    getListing()
 
+    function deleteData(id) {
+        var x = confirm("Are you sure you want to delete?");
+        if (x) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/php/phptask/delete.php",
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    // alert('record deleted successfully..')
+                    getListing()
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr);
+                }
 
+            });
+        }
+    }
 
 });
 </script>
-<script>
-
-</script>
-
 
 </html>
