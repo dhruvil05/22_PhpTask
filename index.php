@@ -15,14 +15,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+    </script> -->
     <!-- Datatable CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
 
     <title>Listing Page</title>
@@ -311,11 +311,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 <script>
@@ -344,7 +342,13 @@ function getSearchData() {
             success: function(data) {
                 $('#user_data').html('');
                 $("#user_data").append(data);
-
+                // $('.delete_record').click(function() {
+                //     id = $(this).attr('data-id');
+                //     deleteData(id)
+                // });
+                // $('.edit_record').click(function() {
+                //     GetUserDetails()
+                // });
             }
         });
     }
@@ -356,7 +360,15 @@ function getListing() {
         url: "http://localhost/php/phptask/fetch.php",
         data: {},
         success: function(data) {
+            // $('#user_data').html('')
             $('#user_data').html(data)
+            // $('.delete_record').click(function() {
+            //     id = $(this).attr('data-id');
+            //     deleteData(id)
+            // });
+            // $('.edit_record').click(function() {
+            //     GetUserDetails()
+            // });
         },
         error: function(xhr, status, error) {
             console.error(xhr);
@@ -366,13 +378,14 @@ function getListing() {
 }
 
 function GetUserDetails(sno) {
-    $('#hidden_user_id').val(sno);
-
+    // $('#hidden_user_id').val(sno);
+    console.log(sno);
     $.post("fetch.php", {
             sno: sno
         }, function(data, status) {
             var user = JSON.parse(data);
             alert(user);
+
             $('#update_name').val(user.name);
             $('#update_phone').val(user.phone);
             $('#update_email').val(user.email);
@@ -383,20 +396,22 @@ function GetUserDetails(sno) {
 }
 
 function updateData() {
-    var name = $('#update_name').val();
-    var phone = $('#update_phone').val();
-    var email = $('#update_email').val();
-    var gender = $('#update_gender').val();
-    var image = $('#update_img').val();
+    // var name = $('#update_name').val();
+    // var phone = $('#update_phone').val();
+    // var email = $('#update_email').val();
+    // var gender = $('#update_gender').val();
+    // var image = $('#update_img').val();
 
-    var hidden_user_id = $('#hidden_user_id').val();
-
+    // var hidden_user_id = $('#hidden_user_id').val();
+    var formdata = new formData(this);
+    alert(new formData(this));
     $.post("fetch.php", {
-            name: name,
-            phone: phone,
-            email: email,
-            gender: gender,
-            image: image,
+
+            // name: name,
+            // phone: phone,
+            // email: email,
+            // gender: gender,
+            // image: image,
         },
         function(data, status) {
             $("#update_modal").modal("hide");
@@ -433,10 +448,10 @@ function deleteData(id) {
 
 function insert() {
     // alert("hello");
-    // $("#add-form").on('submit', function(e) {
-    e.preventDefault();
+    $("#add-form").on('submit', function(e) {
+        e.preventDefault();
 
-    $.ajax({
+        $.ajax({
 
             type: 'POST',
             url: 'http://localhost/php/phptask/store.php',
@@ -445,47 +460,23 @@ function insert() {
             contentType: false,
             cache: false,
             processData: false,
-            beforeSend: function() {
-                $('form[id="add-form"]').validate({
-                            rules: {
-                                name: 'required',
-                                phone: 'required',
-                                email: {
-                                    required: true,
-                                    email: true,
+            // beforeSend: function() {
 
-                                }
-                            },
-                            messages: {
-                                name: 'This field is required',
-                                phone: 'This field is required',
-                                email: 'Enter a valid email',
-                            },
+            // },
+            success: function(data) {
+                alert('Record successfully inserted...');
+                // $('.close').click();
+                getListing();
 
-
-
-                            // insert();
-                            submitHandler: function(form) {
-                                $successMsg.show();
-                                // $('.close').click();
-
-                            });
-                    },
-                    success: function(data) {
-                        alert('Record successfully inserted...');
-                        // $('.close').click();
-                        getListing();
-
-                    }
-            });
+            }
+        });
     });
 }
 
 
-$(document).ready(function(e) {
-    validation();
-});
-
+// $(document).ready(function(e) {
+// validation();
+// });
 function validation() {
     $successMsg = insert();
     if (phone.length < 10) {
