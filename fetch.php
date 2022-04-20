@@ -36,10 +36,9 @@ if($result){
 }
 
  /// get userid for update
- if(isset($_POST['sno']) && isset($_POST['sno']) != "")
- {
+ if(isset($_POST['sno']) && isset($_POST['sno']) != ""){
    $sno = $_POST['sno'];
-   
+   echo($sno);
    $query = "SELECT * FROM `data` WHERE sno=`$sno`";
       if (!$result = mysqli_query($conn, $query)) {
       exit(mysqli_error());

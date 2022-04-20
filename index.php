@@ -311,11 +311,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
 </script>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 <script>
@@ -380,13 +378,14 @@ function getListing() {
 }
 
 function GetUserDetails(sno) {
-    $('#hidden_user_id').val(sno);
-    // console.log(id);
+    // $('#hidden_user_id').val(sno);
+    console.log(sno);
     $.post("fetch.php", {
             sno: sno
         }, function(data, status) {
             var user = JSON.parse(data);
             alert(user);
+            
             $('#update_name').val(user.name);
             $('#update_phone').val(user.phone);
             $('#update_email').val(user.email);
@@ -394,23 +393,25 @@ function GetUserDetails(sno) {
             $('#update_img').val(user.image);
         }),
         $("#update_modal").modal("show");
-}
+}   
 
 function updateData() {
-    var name = $('#update_name').val();
-    var phone = $('#update_phone').val();
-    var email = $('#update_email').val();
-    var gender = $('#update_gender').val();
-    var image = $('#update_img').val();
+    // var name = $('#update_name').val();
+    // var phone = $('#update_phone').val();
+    // var email = $('#update_email').val();
+    // var gender = $('#update_gender').val();
+    // var image = $('#update_img').val();
 
-    var hidden_user_id = $('#hidden_user_id').val();
-    // alert(new formData(this));
+    // var hidden_user_id = $('#hidden_user_id').val();
+    // var formdata = new formData(this);
+    alert(new formData(this));
     $.post("fetch.php", {
-            name: name,
-            phone: phone,
-            email: email,
-            gender: gender,
-            image: image,
+            
+            // name: name,
+            // phone: phone,
+            // email: email,
+            // gender: gender,
+            // image: image,
         },
         function(data, status) {
             $("#update_modal").modal("hide");
