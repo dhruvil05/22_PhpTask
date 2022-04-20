@@ -1,36 +1,24 @@
 <?php
     require "db_connect.php";
-    $sno = $_GET['sno'];
-    $sql = "SELECT * FROM `data` WHERE sno='$sno'";
-    $result = mysqli_query($conn, $sql);
-    
-    
-    if($result){
-        $data = mysqli_fetch_array($result);
-        if($sno == $data['sno']){
+    $sno = $_GET['id'];
+   
             $image = $data['image'];
             $image_Path = "image/".basename($image);
             $sql = "DELETE FROM `data` WHERE sno='$sno'";
             
-       
+            $result = mysqli_query($conn, $sql); 
 
             
-           if($result = mysqli_query($conn, $sql) ){
-               if(basename($image_Path)== $image){
+           if($result){
+            echo "success";
+            //    if(basename($image_Path)== $image){
                    unlink($image);
-               }
-               else{
-                unlink($image);
-               }
+            //    }
+            //    else{
+            //     unlink($image_Path);
+            //    }
             
            }
-            header("location:index.php");
-        }
-        else{
            
-            
-        }
-    }
-    
 
 ?>
