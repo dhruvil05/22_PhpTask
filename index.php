@@ -344,13 +344,7 @@ function getSearchData() {
             success: function(data) {
                 $('#user_data').html('');
                 $("#user_data").append(data);
-                // $('.delete_record').click(function() {
-                //     id = $(this).attr('data-id');
-                //     deleteData(id)
-                // });
-                // $('.edit_record').click(function() {
-                //     GetUserDetails()
-                // });
+
             }
         });
     }
@@ -362,15 +356,7 @@ function getListing() {
         url: "http://localhost/php/phptask/fetch.php",
         data: {},
         success: function(data) {
-            // $('#user_data').html('')
             $('#user_data').html(data)
-            // $('.delete_record').click(function() {
-            //     id = $(this).attr('data-id');
-            //     deleteData(id)
-            // });
-            // $('.edit_record').click(function() {
-            //     GetUserDetails()
-            // });
         },
         error: function(xhr, status, error) {
             console.error(xhr);
@@ -381,7 +367,7 @@ function getListing() {
 
 function GetUserDetails(sno) {
     $('#hidden_user_id').val(sno);
-    // console.log(id);
+
     $.post("fetch.php", {
             sno: sno
         }, function(data, status) {
@@ -404,7 +390,7 @@ function updateData() {
     var image = $('#update_img').val();
 
     var hidden_user_id = $('#hidden_user_id').val();
-    // alert(new formData(this));
+
     $.post("fetch.php", {
             name: name,
             phone: phone,
@@ -447,10 +433,10 @@ function deleteData(id) {
 
 function insert() {
     // alert("hello");
-    $("#add-form").on('submit', function(e) {
-        e.preventDefault();
+    // $("#add-form").on('submit', function(e) {
+    e.preventDefault();
 
-        $.ajax({
+    $.ajax({
 
             type: 'POST',
             url: 'http://localhost/php/phptask/store.php',
@@ -459,23 +445,47 @@ function insert() {
             contentType: false,
             cache: false,
             processData: false,
-            // beforeSend: function() {
+            beforeSend: function() {
+                $('form[id="add-form"]').validate({
+                            rules: {
+                                name: 'required',
+                                phone: 'required',
+                                email: {
+                                    required: true,
+                                    email: true,
 
-            // },
-            success: function(data) {
-                alert('Record successfully inserted...');
-                // $('.close').click();
-                getListing();
+                                }
+                            },
+                            messages: {
+                                name: 'This field is required',
+                                phone: 'This field is required',
+                                email: 'Enter a valid email',
+                            },
 
-            }
-        });
+
+
+                            // insert();
+                            submitHandler: function(form) {
+                                $successMsg.show();
+                                // $('.close').click();
+
+                            });
+                    },
+                    success: function(data) {
+                        alert('Record successfully inserted...');
+                        // $('.close').click();
+                        getListing();
+
+                    }
+            });
     });
 }
 
 
-// $(document).ready(function(e) {
-// validation();
-// });
+$(document).ready(function(e) {
+    validation();
+});
+
 function validation() {
     $successMsg = insert();
     if (phone.length < 10) {
