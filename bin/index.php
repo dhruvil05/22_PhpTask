@@ -15,14 +15,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+    </script> -->
     <!-- Datatable CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
 
     <title>Listing Page</title>
@@ -385,7 +385,11 @@ function GetUserDetails(sno) {
         }, function(data, status) {
             var user = JSON.parse(data);
             alert(user);
+<<<<<<< HEAD:index.php
             
+=======
+
+>>>>>>> master:bin/index.php
             $('#update_name').val(user.name);
             $('#update_phone').val(user.phone);
             $('#update_email').val(user.email);
@@ -403,10 +407,17 @@ function updateData() {
     // var image = $('#update_img').val();
 
     // var hidden_user_id = $('#hidden_user_id').val();
+<<<<<<< HEAD:index.php
     // var formdata = new formData(this);
     alert(new formData(this));
     $.post("fetch.php", {
             
+=======
+    var formdata = new formData(this);
+    alert(new formData(this));
+    $.post("fetch.php", {
+
+>>>>>>> master:bin/index.php
             // name: name,
             // phone: phone,
             // email: email,
